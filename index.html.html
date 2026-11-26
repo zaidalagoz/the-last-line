@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مكتبه السطر الاخير ❤📚</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #070913;
+      --text-main: #f8fafc;
+      --text-muted: rgba(248, 250, 252, 0.7);
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-bg-hover: rgba(255, 255, 255, 0.14);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+      --island-bg: rgba(12, 15, 28, 0.72);
+      --accent: #38bdf8;
+      --accent-2: #a855f7;
+      --accent-glow: rgba(56, 189, 248, 0.45);
+      --success: #34d399;
+      --danger: #fb7185;
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    body.light-mode {
+      --bg-base: #eef2ff;
+      --text-main: #0f172a;
+      --text-muted: rgba(15, 23, 42, 0.68);
+      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-bg-hover: rgba(255, 255, 255, 0.78);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --glass-shadow: 0 20px 45px rgba(31, 38, 135, 0.14), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+      --island-bg: rgba(255, 255, 255, 0.75);
+      --accent: #0284c7;
+      --accent-2: #7c3aed;
+      --accent-glow: rgba(2, 132, 199, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.5s var(--smooth), color 0.4s var(--smooth);
+      padding-bottom: 80px;
+    }
+
+    /* Animated Liquid Mesh Background */
+    .mesh-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(95px);
+      opacity: 0.6;
+      animation: floatBlob 18s infinite alternate ease-in-out;
+    }
+
+    body.light-mode .blob { opacity: 0.45; }
+
+    .blob-1 {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, #38bdf8, #3b82f6);
+      top: -120px; right: -100px;
+    }
+    .blob-2 {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, #a855f7, #ec4899);
+      bottom: -140px; left: -100px;
+      animation-delay: -6s;
+    }
+    .blob-3 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #14b8a6, #6366f1);
+      top: 40%; left: 35%;
+      animation-delay: -11s;
+    }
+
+    @keyframes floatBlob {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, -50px) scale(1.12); }
+      100% { transform: translate(-50px, 40px) scale(0.95); }
+    }
+
+    /* Liquid Glass Utility */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(26px) saturate(180%);
+      -webkit-backdrop-filter: blur(26px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    /* Tactile Spring Button */
+    .btn-glass {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(18px) saturate(180%);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.35s var(--spring), background 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+      user-select: none;
+    }
+
+    .btn-glass:hover {
+      background: var(--glass-bg-hover);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .btn-glass:active {
+      transform: scale(0.92);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 10px 25px var(--accent-glow), inset 0 1px 2px rgba(255, 255, 255, 0.55);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      filter: brightness(1.1);
+    }
+
+    /* Dynamic Island Navbar */
+    .island-wrapper {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: min(94%, 780px);
+      display: flex;
+      justify-content: center;
+    }
+
+    .dynamic-island {
+      width: 100%;
+      background: var(--island-bg);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      padding: 10px 18px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+      transition: all 0.5s var(--spring);
+      overflow: hidden;
+    }
+
+    .dynamic-island.expanded {
+      border-radius: 30px;
+      padding: 14px 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 25px var(--accent-glow);
+    }
+
+    .island-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      font-weight: 900;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .island-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-main);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 1.05rem;
+      position: relative;
+      transition: transform 0.35s var(--spring), background 0.25s;
+    }
+
+    .icon-btn:hover { background: var(--glass-bg-hover); transform: scale(1.08); }
+    .icon-btn:active { transform: scale(0.88); }
+
+    .cart-badge {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f43f5e, #ec4899);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 10px rgba(244, 63, 94, 0.5);
+      transition: transform 0.3s var(--spring);
+    }
+
+    .island-toast {
+      max-height: 0;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.45s var(--spring);
+      margin-top: 0;
+    }
+
+    .dynamic-island.expanded .island-toast {
+      max-height: 80px;
+      opacity: 1;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    /* Main Container */
+    .container {
+      width: min(92%, 1200px);
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 130px;
+      padding-bottom: 50px;
+      text-align: center;
+    }
+
+    .hero-card {
+      border-radius: 36px;
+      padding: 52px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      background: rgba(56, 189, 248, 0.16);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, var(--text-main) 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto 28px;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    /* Controls: Search + Categories */
+    .controls {
+      margin: 28px 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .search-box {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 15px 50px 15px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(22px);
+      color: var(--text-main);
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: var(--glass-shadow);
+    }
+
+    .search-box input::placeholder { color: var(--text-muted); }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow), var(--glass-shadow);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.15rem;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cat-pill {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(18px);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.35s var(--spring);
+    }
+
+    .cat-pill:hover { transform: translateY(-2px); background: var(--glass-bg-hover); }
+    .cat-pill:active { transform: scale(0.92); }
+    .cat-pill.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    /* Books Grid */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 26px;
+      perspective: 1200px;
+    }
+
+    .book-card {
+      position: relative;
+      border-radius: 28px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* Mouse-following Specular Highlight */
+    .book-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      background: radial-gradient(
+        340px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(255, 255, 255, 0.24),
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .book-card:hover::before { opacity: 1; }
+
+    .book-cover {
+      height: 220px;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px;
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.32);
+      transform: translateZ(20px);
+    }
+
+    .book-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, rgba(255,255,255,0.3) 0%, transparent 45%, rgba(0,0,0,0.28) 100%);
+      pointer-events: none;
+    }
+
+    .cover-tag {
+      align-self: flex-start;
+      background: rgba(0, 0, 0, 0.32);
+      backdrop-filter: blur(10px);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      z-index: 1;
+    }
+
+    .cover-title {
+      z-index: 1;
+      font-size: 1.25rem;
+      font-weight: 900;
+      line-height: 1.3;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .cover-emoji {
+      position: absolute;
+      left: 16px;
+      bottom: 14px;
+      font-size: 3rem;
+      opacity: 0.28;
+    }
+
+    .book-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .book-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+    }
+
+    .book-author {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .book-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+    }
+
+    .rating {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fbbf24;
+    }
+
+    .price {
+      font-size: 1.18rem;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .card-actions .btn-glass {
+      flex: 1;
+      padding: 10px 12px;
+      font-size: 0.88rem;
+    }
+
+    /* Glass Modals & Apple Pay Sheet */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 20, 0.62);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      width: min(100%, 560px);
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 32px;
+      padding: 26px;
+      transform: translateY(40px) scale(0.95);
+      transition: transform 0.45s var(--spring);
+    }
+
+    .overlay.open .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .sheet-overlay {
+      align-items: flex-end;
+      padding: 0;
+    }
+
+    .sheet-box {
+      width: min(100%, 540px);
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 34px 34px 0 0;
+      padding: 16px 26px 32px;
+      transform: translateY(100%);
+      transition: transform 0.5s var(--spring);
+    }
+
+    .sheet-overlay.open .sheet-box {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 48px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--glass-border);
+      margin: 0 auto 18px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .sample-box {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--glass-border);
+      line-height: 1.9;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    body.light-mode .sample-box {
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .sample-box.show { display: block; }
+
+    /* Cart Items */
+    .cart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--glass-border);
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-main);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .pay-summary {
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--glass-border);
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pay-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+    }
+
+    .pay-row.total {
+      font-size: 1.2rem;
+      font-weight: 900;
+      padding-top: 8px;
+      border-top: 1px solid var(--glass-border);
+      color: var(--accent);
+    }
+
+    .pay-success {
+      text-align: center;
+      padding: 24px 10px;
+      display: none;
+    }
+
+    .pay-success.show { display: block; }
+
+    .check-circle {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10b981, #34d399);
+      color: #fff;
+      font-size: 2.2rem;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.45);
+      animation: popIn 0.5s var(--spring);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    footer {
+      margin-top: 70px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px 20px;
+      border-radius: 28px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 600px) {
+      .brand { font-size: 0.92rem; }
+      .hero-card { padding: 36px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Mesh Background -->
+  <div class="mesh-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Dynamic Island Navigation -->
+  <div class="island-wrapper">
+    <nav class="dynamic-island" id="dynamicIsland">
+      <div class="island-bar">
+        <a href="#" class="brand">مكتبه السطر الاخير ❤📚</a>
+        <div class="island-actions">
+          <button class="icon-btn" id="themeToggle" title="تغيير المظهر">🌙</button>
+          <button class="icon-btn" id="openCartBtn" title="سلة المشتريات">
+            🛒
+            <span class="cart-badge" id="cartCount">0</span>
+          </button>
+        </div>
+      </div>
+      <div class="island-toast" id="islandToast">
+        <span id="toastText" style="font-size: 0.9rem; font-weight: 700;">تمت الإضافة إلى السلة</span>
+        <button class="btn-glass btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openCart()">عرض السلة</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card glass">
+        <div class="hero-badge">✨ تجربة قراءة وتسوق بتصميم iOS 26 Liquid Glass</div>
+        <h1>مكتبه السطر الاخير ❤📚</h1>
+        <p>
+          أقوى تشكيلة كتب وروايات ومراجع علمية واقتصادية في مكان واحد. تصفّح، اقرأ أول صفحتين مجاناً، واطلب كتابك بضغطة زر وتجربة زجاجية تفاعلية.
+        </p>
+        <div class="hero-btns">
+          <a href="#catalog" class="btn-glass btn-primary">تصفّح الكتب الآن ↓</a>
+          <button class="btn-glass" onclick="openCart()">إتمام الطلب 💳</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Filter Controls -->
+    <section id="catalog" class="controls">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="ابحث باسم الكتاب أو المؤلف..." />
+      </div>
+      <div class="categories" id="categoriesBar"></div>
+    </section>
+
+    <!-- Books Grid -->
+    <section class="books-grid" id="booksGrid"></section>
+
+    <footer>
+      <p>جميع الحقوق محفوظة © 2026 — <strong>مكتبه السطر الاخير ❤📚</strong></p>
+    </footer>
+  </main>
+
+  <!-- Book Preview Modal -->
+  <div class="overlay" id="bookModal">
+    <div class="modal-box glass">
+      <div class="modal-header">
+        <h3 id="modalTitle">عنوان الكتاب</h3>
+        <button class="icon-btn" onclick="closeBookModal()">✕</button>
+      </div>
+      <p id="modalAuthor" style="color: var(--text-muted); margin-bottom: 10px;"></p>
+      <p id="modalDesc" style="line-height: 1.8; margin-bottom: 18px;"></p>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button class="btn-glass" id="toggleSampleBtn">📖 اقرأ أول صفحتين</button>
+        <button class="btn-glass btn-primary" id="modalAddBtn">أضف للسلة</button>
+      </div>
+
+      <div class="sample-box" id="sampleBox"></div>
+    </div>
+  </div>
+
+  <!-- Apple Pay Style Cart & Checkout Sheet -->
+  <div class="overlay sheet-overlay" id="cartSheet">
+    <div class="sheet-box glass">
+      <div class="sheet-handle"></div>
+      <div class="modal-header">
+        <h3>سلة مكتبه السطر الاخير ❤📚</h3>
+        <button class="icon-btn" onclick="closeCart()">✕</button>
+      </div>
+
+      <div id="cartContent">
+        <div class="cart-list" id="cartList"></div>
+
+        <div class="pay-summary" id="paySummary">
+          <div class="pay-row"><span>المجموع الفرعي</span><span id="subtotalText">0 ج.م</span></div>
+          <div class="pay-row"><span>الشحن السريع</span><span>40 ج.م</span></div>
+          <div class="pay-row total"><span>الإجمالي</span><span id="totalText">0 ج.م</span></div>
+        </div>
+
+        <button class="btn-glass btn-primary" id="checkoutBtn" style="width: 100%; padding: 14px; font-size: 1.05rem;">
+           الدفع السريع وتأكيد الطلب
+        </button>
+      </div>
+
+      <div class="pay-success" id="paySuccess">
+        <div class="check-circle">✓</div>
+        <h3 style="margin-bottom: 8px;">تم تأكيد طلبك بنجاح!</h3>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">
+          شكراً لتسوقك من <strong>مكتبه السطر الاخير ❤📚</strong>. طلبك بيتجهز وهيوصل لحد باب بيتك خلال 48 ساعة.
+        </p>
+        <button class="btn-glass btn-primary" onclick="closeCart()">العودة للمكتبة</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const books = [
+      {
+        id: 1,
+        title: "أرض زيكولا",
+        author: "عمرو عبد الحميد",
+        category: "روايات",
+        price: 165,
+        rating: 4.9,
+        emoji: "🏛️",
+        gradient: "linear-gradient(135deg, #0ea5e9, #6366f1)",
+        desc: "رواية خيالية مشوقة عن شاب يجد نفسه في أرض لا تتعامل بالمال بل بوحدات الذكاء، حيث يصبح الفقير مهدداً بالذبح.",
+        sample: "«هل جربت أن تتعامل بعملة مختلفة عن العملات الورقية؟ ليست معدنية وليست ذهبية... الثروة هنا هي نوع آخر من الثروات؛ لن تدفع مالاً لتأخذ، بل ستدفع من ذكائك...»"
+      },
+      {
+        id: 2,
+        title: "مبادئ الاقتصاد الحديث",
+        author: "د. سامي عفيفي",
+        category: "اقتصاد",
+        price: 210,
+        rating: 4.8,
+        emoji: "📈",
+        gradient: "linear-gradient(135deg, #10b981, #0d9488)",
+        desc: "دليل مبسط وعملي لفهم العرض والطلب، الأسواق، التضخم، وكيفية اتخاذ قرارات اقتصادية ذكية في عالم اليوم.",
+        sample: "«الاقتصاد ليس مجرد أرقام ومعادلات معقدة، بل هو علم دراسة الاختيارات البشرية في ظل ندرة الموارد. كل قرار تتخذه يومياً له تكلفة فرصة بديلة...»"
+      },
+      {
+        id: 3,
+        title: "العادات الذرية",
+        author: "جيمس كلير",
+        category: "تطوير ذات",
+        price: 190,
+        rating: 4.9,
+        emoji: "⚡",
+        gradient: "linear-gradient(135deg, #f59e0b, #ef4444)",
+        desc: "كيف تصنع تغييرات صغيرة جداً بنسبة 1% يومياً لتبني نظاماً يحقق لك نتائج مذهلة على المدى الطويل.",
+        sample: "«أنت لا ترتقي إلى مستوى أهدافك، بل تهبط إلى مستوى أنظمتك. التغييرات التي تبدو تافهة في البداية تتراكم بمرور السنوات لتصنع فارقاً هائلاً...»"
+      },
+      {
+        id: 4,
+        title: "فن كتابة الكود النظيف",
+        author: "روبرت سي. مارتن",
+        category: "برمجة",
+        price: 280,
+        rating: 4.9,
+        emoji: "💻",
+        gradient: "linear-gradient(135deg, #8b5cf6, #ec4899)",
+        desc: "المرجع الأشهر لكل مبرمج يريد تحويل أكواده من مجرد سطور تعمل إلى هندسة برمجية احترافية سهلة الصيانة.",
+        sample: "«أي أحمق يمكنه كتابة كود يفهمه الكمبيوتر، لكن المبرمج الجيد فقط هو من يكتب كوداً يفهمه البشر بسهولة بعد ستة أشهر...»"
+      },
+      {
+        id: 5,
+        title: "أنتيخريستوس",
+        author: "أحمد خالد مصطفى",
+        category: "تاريخ",
+        price: 175,
+        rating: 4.7,
+        emoji: "🕯️",
+        gradient: "linear-gradient(135deg, #dc2626, #7f1d1d)",
+        desc: "رحلة تاريخية غامضة تمزج بين الوقائع التاريخية والأساطير منذ فجر التاريخ وحتى العصر الحديث بأسلوب مشوق.",
+        sample: "«اجلس الآن واستمع جيداً؛ ما ستقرؤه في الصفحات القادمة ليس مجرد حكايات عابرة، بل خيوط خفية ربطت بين أحداث غيّرت مجرى العالم...»"
+      },
+      {
+        id: 6,
+        title: "سيكولوجية المال",
+        author: "مورجان هاوسل",
+        category: "اقتصاد",
+        price: 195,
+        rating: 4.8,
+        emoji: "💰",
+        gradient: "linear-gradient(135deg, #06b6d4, #2563eb)",
+        desc: "19 قصة قصيرة تشرح الطرق الغريبة التي يفكر بها الناس تجاه المال وتعلمك كيف تبني ثروة وتحافظ عليها.",
+        sample: "«النجاح المالي ليس علماً دقيقاً كالفيزياء، إنه مهارة ناعمة حيث يكون سلوكك أهم بكثير من مدى ذكائك أو شهاداتك...»"
+      },
+      {
+        id: 7,
+        title: "في ممر الفئران",
+        author: "أحمد خالد توفيق",
+        category: "روايات",
+        price: 160,
+        rating: 4.9,
+        emoji: "🌌",
+        gradient: "linear-gradient(135deg, #334155, #0f172a)",
+        desc: "رواية سوداوية ساحرة عن عالم الظلام الدامس حيث يصبح النور جريمة والحلم بالخروج مغامرة مستحيلة.",
+        sample: "«الظلام ليس غياب الضوء فحسب، إنه كائن حي يتنفس حولنا ويقنعنا يوماً بعد يوم أن الشمس لم تكن سوى خرافة قديمة...»"
+      },
+      {
+        id: 8,
+        title: "أساسيات تطوير الويب",
+        author: "م. طارق المنصور",
+        category: "برمجة",
+        price: 230,
+        rating: 4.7,
+        emoji: "🌐",
+        gradient: "linear-gradient(135deg, #ec4899, #f97316)",
+        desc: "رحلة عملية من الصفر للاحتراف في بناء واجهات تفاعلية حديثة باستخدام HTML و CSS و JavaScript.",
+        sample: "«الويب الحديث لم يعد مجرد صفحات نصية جامدة؛ باستخدام CSS والأنيميشن الذكي يمكنك صناعة تجربة تضاهي أقوى تطبيقات الهواتف...»"
+      }
+    ];
+
+    const categories = ["الكل", "روايات", "اقتصاد", "برمجة", "تطوير ذات", "تاريخ"];
+    let activeCategory = "الكل";
+    let searchQuery = "";
+    let cart = JSON.parse(localStorage.getItem("lastLineCart")) || [];
+    let islandTimer = null;
+
+    const booksGrid = document.getElementById("booksGrid");
+    const categoriesBar = document.getElementById("categoriesBar");
+    const searchInput = document.getElementById("searchInput");
+    const cartCount = document.getElementById("cartCount");
+    const dynamicIsland = document.getElementById("dynamicIsland");
+    const toastText = document.getElementById("toastText");
+
+    // Theme Toggle
+    const themeToggle = document.getElementById("themeToggle");
+    if (localStorage.getItem("lastLineTheme") === "light") {
+      document.body.classList.add("light-mode");
+      themeToggle.textContent = "☀️";
+    }
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      const isLight = document.body.classList.contains("light-mode");
+      themeToggle.textContent = isLight ? "☀️" : "🌙";
+      localStorage.setItem("lastLineTheme", isLight ? "light" : "dark");
+    });
+
+    // Render Categories
+    function renderCategories() {
+      categoriesBar.innerHTML = categories.map(cat => `
+        <button class="cat-pill ${cat === activeCategory ? "active" : ""}" onclick="setCategory('${cat}')">${cat}</button>
+      `).join("");
+    }
+
+    function setCategory(cat) {
+      activeCategory = cat;
+      renderCategories();
+      renderBooks();
+    }
+
+    // Render Books with 3D Tilt & Specular Highlight
+    function renderBooks() {
+      const filtered = books.filter(b => {
+        const matchCat = activeCategory === "الكل" || b.category === activeCategory;
+        const q = searchQuery.trim().toLowerCase();
+        const matchSearch = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q);
+        return matchCat && matchSearch;
+      });
+
+      if (!filtered.length) {
+        booksGrid.innerHTML = `<div class="empty-state glass"><h3>مفيش كتب مطابقة لبحثك 🔍</h3><p>جرب تكتب كلمة تانية أو تختار قسم "الكل".</p></div>`;
+        return;
+      }
+
+      booksGrid.innerHTML = filtered.map(book => `
+        <article class="book-card glass" onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)" onclick="openBookModal(${book.id})">
+          <div class="book-cover" style="background: ${book.gradient}">
+            <span class="cover-tag">${book.category}</span>
+            <div class="cover-title">${book.title}</div>
+            <span class="cover-emoji">${book.emoji}</span>
+          </div>
+          <div class="book-info">
+            <h3 class="book-title">${book.title}</h3>
+            <p class="book-author">${book.author}</p>
+            <div class="book-meta">
+              <span class="rating">★ ${book.rating}</span>
+              <span class="price">${book.price} ج.م</span>
+            </div>
+          </div>
+          <div class="card-actions" onclick="event.stopPropagation()">
+            <button class="btn-glass" onclick="openBookModal(${book.id})">معاينة</button>
+            <button class="btn-glass btn-primary" onclick="addToCart(${book.id})">+ للسلة</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    // 3D Tilt + Liquid Specular Light
+    function handleTilt(e, card) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateY = ((x / rect.width) - 0.5) * 14;
+      const rotateX = ((y / rect.height) - 0.5) * -14;
+
+      card.style.setProperty("--mx", `${x}px`);
+      card.style.setProperty("--my", `${y}px`);
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    }
+
+    function resetTilt(card) {
+      card.style.transform = `rotateX(0deg) rotateY(0deg) translateY(0)`;
+    }
+
+    // Book Modal
+    const bookModal = document.getElementById("bookModal");
+    const sampleBox = document.getElementById("sampleBox");
+
+    function openBookModal(id) {
+      const book = books.find(b => b.id === id);
+      if (!book) return;
+      document.getElementById("modalTitle").textContent = `${book.emoji} ${book.title}`;
+      document.getElementById("modalAuthor").textContent = `تأليف: ${book.author} • ${book.category} • ${book.price} ج.م`;
+      document.getElementById("modalDesc").textContent = book.desc;
+      sampleBox.textContent = book.sample;
+      sampleBox.classList.remove("show");
+
+      document.getElementById("toggleSampleBtn").onclick = () => {
+        sampleBox.classList.toggle("show");
+      };
+      document.getElementById("modalAddBtn").onclick = () => {
+        addToCart(book.id);
+        closeBookModal();
+      };
+      bookModal.classList.add("open");
+    }
+
+    function closeBookModal() {
+      bookModal.classList.remove("open");
+    }
+
+    bookModal.addEventListener("click", e => {
+      if (e.target === bookModal) closeBookModal();
+    });
+
+    // Cart Logic + Dynamic Island Notification
+    function saveCart() {
+      localStorage.setItem("lastLineCart", JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    function updateCartBadge() {
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      cartCount.textContent = totalItems;
+    }
+
+    function showIslandToast(msg) {
+      toastText.textContent = msg;
+      dynamicIsland.classList.add("expanded");
+      clearTimeout(islandTimer);
+      islandTimer = setTimeout(() => {
+        dynamicIsland.classList.remove("expanded");
+      }, 3200);
+    }
+
+    function addToCart(id) {
+      const book = books.find(b => b.id === id);
+      if (!book) return;
+      const existing = cart.find(i => i.id === id);
+      if (existing) existing.qty += 1;
+      else cart.push({ ...book, qty: 1 });
+      saveCart();
+      showIslandToast(`تمت إضافة "${book.title}" للسلة ✓`);
+    }
+
+    function changeQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+      saveCart();
+      renderCartSheet();
+    }
+
+    // Cart Sheet (Apple Pay Style)
+    const cartSheet = document.getElementById("cartSheet");
+    const cartList = document.getElementById("cartList");
+    const cartContent = document.getElementById("cartContent");
+    const paySuccess = document.getElementById("paySuccess");
+    const checkoutBtn = document.getElementById("checkoutBtn");
+
+    function renderCartSheet() {
+      paySuccess.classList.remove("show");
+      cartContent.style.display = "block";
+
+      if (!cart.length) {
+        cartList.innerHTML = `<p style="text-align:center; color: var(--text-muted); padding: 20px 0;">السلة فاضية حالياً.. اختار كتابك المفضل 📚</p>`;
+        document.getElementById("paySummary").style.display = "none";
+        checkoutBtn.style.display = "none";
+        return;
+      }
+
+      document.getElementById("paySummary").style.display = "flex";
+      checkoutBtn.style.display = "inline-flex";
+
+      cartList.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div>
+            <div style="font-weight: 800;">${item.title}</div>
+            <div style="font-size: 0.85rem; color: var(--accent);">${item.price * item.qty} ج.م</div>
+          </div>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+            <span style="min-width: 22px; text-align:center; font-weight: 700;">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+          </div>
+        </div>
+      `).join("");
+
+      const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+      document.getElementById("subtotalText").textContent = `${subtotal} ج.م`;
+      document.getElementById("totalText").textContent = `${subtotal + 40} ج.م`;
+    }
+
+    function openCart() {
+      dynamicIsland.classList.remove("expanded");
+      renderCartSheet();
+      cartSheet.classList.add("open");
+    }
+
+    function closeCart() {
+      cartSheet.classList.remove("open");
+    }
+
+    document.getElementById("openCartBtn").addEventListener("click", openCart);
+    cartSheet.addEventListener("click", e => {
+      if (e.target === cartSheet) closeCart();
+    });
+
+    checkoutBtn.addEventListener("click", () => {
+      checkoutBtn.textContent = "جاري تأكيد الدفع...";
+      checkoutBtn.disabled = true;
+      setTimeout(() => {
+        cart = [];
+        saveCart();
+        cartContent.style.display = "none";
+        paySuccess.classList.add("show");
+        checkoutBtn.textContent = " الدفع السريع وتأكيد الطلب";
+        checkoutBtn.disabled = false;
+      }, 900);
+    });
+
+    searchInput.addEventListener("input", e => {
+      searchQuery = e.target.value;
+      renderBooks();
+    });
+
+    // Init
+    renderCategories();
+    renderBooks();
+    updateCartBadge();
+  </script>
+</body>
+</html>

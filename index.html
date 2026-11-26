@@ -2,847 +2,1063 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>مكتبه السطر الاخير ❤📚</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #070913;
-      --text-main: #f8fafc;
-      --text-muted: rgba(248, 250, 252, 0.7);
-      --glass-bg: rgba(255, 255, 255, 0.08);
-      --glass-bg-hover: rgba(255, 255, 255, 0.14);
-      --glass-border: rgba(255, 255, 255, 0.22);
-      --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.35);
-      --island-bg: rgba(12, 15, 28, 0.72);
+      --bg: #04060e;
+      --surface: rgba(255, 255, 255, 0.065);
+      --surface-strong: rgba(255, 255, 255, 0.11);
+      --border: rgba(255, 255, 255, 0.18);
+      --border-top: rgba(255, 255, 255, 0.42);
+      --text: #f8fafc;
+      --muted: rgba(248, 250, 252, 0.66);
       --accent: #38bdf8;
-      --accent-2: #a855f7;
-      --accent-glow: rgba(56, 189, 248, 0.45);
-      --success: #34d399;
-      --danger: #fb7185;
-      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --accent-2: #818cf8;
+      --pink: #f472b6;
+      --green: #25D366;
+      --island: rgba(8, 10, 18, 0.82);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 var(--border-top);
+      --spring: cubic-bezier(0.32, 1.45, 0.55, 1);
       --smooth: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    body.light-mode {
-      --bg-base: #eef2ff;
-      --text-main: #0f172a;
-      --text-muted: rgba(15, 23, 42, 0.68);
-      --glass-bg: rgba(255, 255, 255, 0.55);
-      --glass-bg-hover: rgba(255, 255, 255, 0.78);
-      --glass-border: rgba(255, 255, 255, 0.85);
-      --glass-shadow: 0 20px 45px rgba(31, 38, 135, 0.14), inset 0 1px 2px rgba(255, 255, 255, 0.95);
-      --island-bg: rgba(255, 255, 255, 0.75);
+    body.light {
+      --bg: #eef2ff;
+      --surface: rgba(255, 255, 255, 0.58);
+      --surface-strong: rgba(255, 255, 255, 0.82);
+      --border: rgba(15, 23, 42, 0.1);
+      --border-top: rgba(255, 255, 255, 0.95);
+      --text: #0f172a;
+      --muted: rgba(15, 23, 42, 0.64);
       --accent: #0284c7;
-      --accent-2: #7c3aed;
-      --accent-glow: rgba(2, 132, 199, 0.25);
+      --accent-2: #6366f1;
+      --island: rgba(255, 255, 255, 0.82);
+      --shadow: 0 20px 45px rgba(30, 41, 59, 0.12), inset 0 1px 0 var(--border-top);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+      font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg-base);
-      color: var(--text-main);
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
-      transition: background 0.5s var(--smooth), color 0.4s var(--smooth);
-      padding-bottom: 80px;
+      padding-bottom: 120px;
+      transition: background 0.5s var(--smooth), color 0.35s var(--smooth);
     }
 
-    /* Animated Liquid Mesh Background */
-    .mesh-bg {
+    /* iOS 27 Spatial Aurora Mesh */
+    .aurora {
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: -2;
       overflow: hidden;
       pointer-events: none;
     }
 
-    .blob {
+    .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(95px);
-      opacity: 0.6;
-      animation: floatBlob 18s infinite alternate ease-in-out;
+      filter: blur(110px);
+      opacity: 0.55;
+      animation: drift 20s infinite alternate ease-in-out;
     }
 
-    body.light-mode .blob { opacity: 0.45; }
+    body.light .orb { opacity: 0.38; }
 
-    .blob-1 {
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, #38bdf8, #3b82f6);
-      top: -120px; right: -100px;
-    }
-    .blob-2 {
-      width: 480px; height: 480px;
-      background: radial-gradient(circle, #a855f7, #ec4899);
-      bottom: -140px; left: -100px;
-      animation-delay: -6s;
-    }
-    .blob-3 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, #14b8a6, #6366f1);
-      top: 40%; left: 35%;
-      animation-delay: -11s;
-    }
+    .orb-1 { width: 560px; height: 560px; background: radial-gradient(circle, #38bdf8, #2563eb); top: -180px; right: -120px; }
+    .orb-2 { width: 520px; height: 520px; background: radial-gradient(circle, #a855f7, #ec4899); bottom: -160px; left: -120px; animation-delay: -7s; }
+    .orb-3 { width: 420px; height: 420px; background: radial-gradient(circle, #14b8a6, #6366f1); top: 38%; left: 32%; animation-delay: -13s; }
 
-    @keyframes floatBlob {
+    @keyframes drift {
       0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(60px, -50px) scale(1.12); }
-      100% { transform: translate(-50px, 40px) scale(0.95); }
+      50% { transform: translate(65px, -45px) scale(1.12); }
+      100% { transform: translate(-45px, 50px) scale(0.94); }
     }
 
-    /* Liquid Glass Utility */
-    .glass {
-      background: var(--glass-bg);
-      backdrop-filter: blur(26px) saturate(180%);
-      -webkit-backdrop-filter: blur(26px) saturate(180%);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
+    /* Liquid Glass Surface */
+    .liquid {
+      background: var(--surface);
+      backdrop-filter: blur(36px) saturate(210%);
+      -webkit-backdrop-filter: blur(36px) saturate(210%);
+      border: 1px solid var(--border);
+      border-top-color: var(--border-top);
+      box-shadow: var(--shadow);
     }
 
-    /* Tactile Spring Button */
-    .btn-glass {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 11px 22px;
-      border-radius: 999px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      backdrop-filter: blur(18px) saturate(180%);
-      color: var(--text-main);
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: transform 0.35s var(--spring), background 0.25s ease, box-shadow 0.25s ease;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.4);
-      user-select: none;
-    }
-
-    .btn-glass:hover {
-      background: var(--glass-bg-hover);
-      transform: translateY(-2px) scale(1.02);
-    }
-
-    .btn-glass:active {
-      transform: scale(0.92);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.35);
-      box-shadow: 0 10px 25px var(--accent-glow), inset 0 1px 2px rgba(255, 255, 255, 0.55);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      filter: brightness(1.1);
-    }
-
-    /* Dynamic Island Navbar */
-    .island-wrapper {
+    /* Dynamic Island */
+    .island-wrap {
       position: fixed;
-      top: 18px;
+      top: 14px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 1000;
-      width: min(94%, 780px);
-      display: flex;
-      justify-content: center;
+      z-index: 1200;
+      width: min(94%, 560px);
     }
 
-    .dynamic-island {
-      width: 100%;
-      background: var(--island-bg);
-      backdrop-filter: blur(32px) saturate(200%);
-      -webkit-backdrop-filter: blur(32px) saturate(200%);
-      border: 1px solid var(--glass-border);
-      border-radius: 999px;
-      padding: 10px 18px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.35);
-      transition: all 0.5s var(--spring);
+    .island {
+      background: var(--island);
+      backdrop-filter: blur(40px) saturate(220%);
+      -webkit-backdrop-filter: blur(40px) saturate(220%);
+      border: 1px solid var(--border);
+      border-top-color: var(--border-top);
+      border-radius: 32px;
+      padding: 10px 16px;
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.5), inset 0 1px 0 var(--border-top);
+      transition: all 0.48s var(--spring);
       overflow: hidden;
     }
 
-    .dynamic-island.expanded {
-      border-radius: 30px;
-      padding: 14px 20px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 25px var(--accent-glow);
+    .island.live {
+      border-radius: 28px;
+      padding: 14px 18px;
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.65), 0 0 30px rgba(56, 189, 248, 0.28);
     }
 
-    .island-bar {
+    .island-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand {
-      font-weight: 900;
-      font-size: 1.05rem;
       display: flex;
       align-items: center;
-      gap: 6px;
-      white-space: nowrap;
+      gap: 8px;
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--text);
       text-decoration: none;
-      color: var(--text-main);
     }
 
-    .island-actions {
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 10px #22c55e;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.6; }
+    }
+
+    .island-btns {
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .icon-btn {
-      width: 40px;
-      height: 40px;
+    .circle-btn {
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      color: var(--text-main);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
       display: grid;
       place-items: center;
       cursor: pointer;
-      font-size: 1.05rem;
+      font-size: 1rem;
       position: relative;
-      transition: transform 0.35s var(--spring), background 0.25s;
+      transition: transform 0.35s var(--spring), background 0.2s;
     }
 
-    .icon-btn:hover { background: var(--glass-bg-hover); transform: scale(1.08); }
-    .icon-btn:active { transform: scale(0.88); }
+    .circle-btn:hover { background: var(--surface-strong); transform: scale(1.08); }
+    .circle-btn:active { transform: scale(0.88); }
 
-    .cart-badge {
+    .badge {
       position: absolute;
       top: -4px;
       left: -4px;
-      min-width: 20px;
-      height: 20px;
+      min-width: 19px;
+      height: 19px;
       padding: 0 5px;
       border-radius: 999px;
       background: linear-gradient(135deg, #f43f5e, #ec4899);
       color: #fff;
-      font-size: 0.72rem;
-      font-weight: 800;
+      font-size: 0.7rem;
+      font-weight: 900;
       display: grid;
       place-items: center;
-      box-shadow: 0 4px 10px rgba(244, 63, 94, 0.5);
-      transition: transform 0.3s var(--spring);
+      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.55);
     }
 
-    .island-toast {
+    .island-notify {
       max-height: 0;
       opacity: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       transition: all 0.45s var(--spring);
-      margin-top: 0;
     }
 
-    .dynamic-island.expanded .island-toast {
-      max-height: 80px;
+    .island.live .island-notify {
+      max-height: 70px;
       opacity: 1;
       margin-top: 12px;
       padding-top: 12px;
-      border-top: 1px solid var(--glass-border);
+      border-top: 1px solid var(--border);
     }
 
-    /* Main Container */
+    /* Container */
     .container {
       width: min(92%, 1200px);
       margin: 0 auto;
     }
 
-    /* Hero Section */
+    /* Hero iOS 27 */
     .hero {
-      padding-top: 130px;
-      padding-bottom: 50px;
-      text-align: center;
+      padding-top: 105px;
+      padding-bottom: 34px;
     }
 
     .hero-card {
-      border-radius: 36px;
-      padding: 52px 28px;
+      border-radius: 38px;
+      padding: 40px 30px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 30px;
       position: relative;
       overflow: hidden;
     }
 
-    .hero-badge {
+    .ios-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 16px;
+      padding: 6px 15px;
       border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      background: rgba(56, 189, 248, 0.16);
-      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-size: 0.82rem;
+      font-weight: 800;
       color: var(--accent);
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      margin-bottom: 16px;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-size: clamp(2rem, 4.6vw, 3.3rem);
       font-weight: 900;
-      line-height: 1.25;
+      line-height: 1.22;
       margin-bottom: 14px;
-      background: linear-gradient(135deg, var(--text-main) 30%, var(--accent) 100%);
+      background: linear-gradient(135deg, var(--text) 35%, var(--accent) 85%, var(--pink));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero p {
-      max-width: 650px;
-      margin: 0 auto 28px;
-      color: var(--text-muted);
-      font-size: 1.08rem;
-      line-height: 1.8;
-    }
-
-    .hero-btns {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    /* Controls: Search + Categories */
-    .controls {
-      margin: 28px 0 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .search-box {
-      position: relative;
-      width: 100%;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.85;
+      margin-bottom: 24px;
       max-width: 560px;
-      margin: 0 auto;
     }
 
-    .search-box input {
-      width: 100%;
-      padding: 15px 50px 15px 20px;
-      border-radius: 999px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      backdrop-filter: blur(22px);
-      color: var(--text-main);
-      font-size: 1rem;
-      outline: none;
-      transition: all 0.3s ease;
-      box-shadow: var(--glass-shadow);
-    }
-
-    .search-box input::placeholder { color: var(--text-muted); }
-
-    .search-box input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-glow), var(--glass-shadow);
-    }
-
-    .search-icon {
-      position: absolute;
-      right: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.15rem;
-      opacity: 0.75;
-      pointer-events: none;
-    }
-
-    .categories {
+    .hero-actions {
       display: flex;
-      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .hero-stats {
+      display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .cat-pill {
+    .stat-chip {
+      padding: 7px 14px;
+      border-radius: 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      border-top-color: var(--border-top);
+      background: var(--surface-strong);
+      color: var(--text);
+      font-weight: 800;
+      font-size: 0.92rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.35s var(--spring), filter 0.25s, box-shadow 0.25s;
+      user-select: none;
+    }
+
+    .btn:hover { transform: translateY(-2px) scale(1.02); }
+    .btn:active { transform: scale(0.93); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(14, 165, 233, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.55);
+    }
+
+    .btn-wa {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Hero 3D Showcase Book */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1100px;
+      min-height: 270px;
+    }
+
+    /* Realistic 3D Book Component */
+    .book-stage {
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 18px 0 24px;
+      position: relative;
+    }
+
+    .book-3d {
+      position: relative;
+      width: 156px;
+      height: 228px;
+      transform-style: preserve-3d;
+      transform: rotateY(-24deg) rotateX(6deg);
+      transition: transform 0.55s var(--spring);
+      cursor: pointer;
+    }
+
+    .hero-visual .book-3d {
+      width: 185px;
+      height: 268px;
+      animation: floatBook 5s ease-in-out infinite;
+    }
+
+    @keyframes floatBook {
+      0%, 100% { transform: rotateY(-24deg) rotateX(6deg) translateY(0); }
+      50% { transform: rotateY(-14deg) rotateX(2deg) translateY(-12px); }
+    }
+
+    .product-card:hover .book-3d {
+      transform: rotateY(-6deg) rotateX(2deg) translateY(-10px) scale(1.04);
+    }
+
+    /* Book Front Cover */
+    .book-front {
+      position: absolute;
+      inset: 0;
+      border-radius: 4px 14px 14px 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 14px 14px 14px 18px;
+      color: #fff;
+      transform: translateZ(16px);
+      box-shadow: 12px 18px 34px rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .book-front img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.42;
+      mix-blend-mode: luminosity;
+      z-index: 0;
+    }
+
+    /* Spine groove + glossy highlight */
+    .book-front::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 14px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.0), rgba(255,255,255,0.28) 45%, rgba(0,0,0,0.45) 100%);
+      z-index: 2;
+    }
+
+    .book-front::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.04) 42%, rgba(0,0,0,0.55) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .book-front > * { position: relative; z-index: 3; }
+
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cover-cat {
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .cover-emblem {
+      font-size: 1.65rem;
+      text-align: center;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45));
+    }
+
+    .cover-name {
+      font-size: 1.02rem;
+      font-weight: 900;
+      line-height: 1.28;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.75);
+    }
+
+    .cover-writer {
+      font-size: 0.7rem;
+      opacity: 0.9;
+      margin-top: 3px;
+      font-weight: 700;
+    }
+
+    /* Book Spine (Right side in RTL) */
+    .book-spine {
+      position: absolute;
+      top: 0;
+      right: -15px;
+      width: 30px;
+      height: 100%;
+      transform: rotateY(90deg);
+      border-radius: 3px;
+      filter: brightness(0.72);
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Book White Pages (Left side in RTL) */
+    .book-pages {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: -13px;
+      width: 26px;
+      transform: rotateY(-90deg);
+      background: repeating-linear-gradient(
+        90deg,
+        #f8fafc 0px,
+        #f8fafc 2px,
+        #cbd5e1 2px,
+        #cbd5e1 3px
+      );
+      border-radius: 2px;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.22);
+    }
+
+    /* Book Back Cover */
+    .book-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 4px 14px 14px 4px;
+      transform: translateZ(-14px);
+      filter: brightness(0.5);
+    }
+
+    /* Glass Shelf Shadow under book */
+    .book-shadow {
+      position: absolute;
+      bottom: 8px;
+      width: 145px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55), transparent 72%);
+      filter: blur(6px);
+      pointer-events: none;
+    }
+
+    /* Controls (Search + iOS Segmented Pills) */
+    .controls {
+      margin: 12px 0 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .search-wrap {
+      position: relative;
+      width: min(100%, 560px);
+      margin: 0 auto;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 15px 48px 15px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      border-top-color: var(--border-top);
+      background: var(--surface);
+      backdrop-filter: blur(30px);
+      color: var(--text);
+      font-size: 0.98rem;
+      outline: none;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .search-wrap input::placeholder { color: var(--muted); }
+    .search-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.25), var(--shadow); }
+    .search-ico { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); opacity: 0.7; }
+
+    .cats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cat-btn {
       padding: 9px 18px;
       border-radius: 999px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      backdrop-filter: blur(18px);
-      color: var(--text-main);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      color: var(--text);
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
       transition: all 0.35s var(--spring);
     }
 
-    .cat-pill:hover { transform: translateY(-2px); background: var(--glass-bg-hover); }
-    .cat-pill:active { transform: scale(0.92); }
-    .cat-pill.active {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    .cat-btn:hover { background: var(--surface-strong); transform: translateY(-2px); }
+    .cat-btn.active {
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.4);
-      box-shadow: 0 8px 20px var(--accent-glow);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 8px 22px rgba(14, 165, 233, 0.38);
     }
 
-    /* Books Grid */
-    .books-grid {
+    /* Products Grid */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
-      gap: 26px;
-      perspective: 1200px;
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+      gap: 24px;
     }
 
-    .book-card {
-      position: relative;
-      border-radius: 28px;
+    .product-card {
+      border-radius: 32px;
       padding: 18px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      transition: transform 0.2s ease-out, box-shadow 0.3s ease;
-      transform-style: preserve-3d;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    /* Mouse-following Specular Highlight */
-    .book-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 28px;
-      background: radial-gradient(
-        340px circle at var(--mx, 50%) var(--my, 50%),
-        rgba(255, 255, 255, 0.24),
-        transparent 60%
-      );
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .book-card:hover::before { opacity: 1; }
-
-    .book-cover {
-      height: 220px;
-      border-radius: 20px;
+      gap: 10px;
       position: relative;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 18px;
-      color: #fff;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.32);
-      transform: translateZ(20px);
+      transition: transform 0.35s var(--spring), border-color 0.25s;
     }
 
-    .book-cover::after {
-      content: "";
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .fav-btn {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(125deg, rgba(255,255,255,0.3) 0%, transparent 45%, rgba(0,0,0,0.28) 100%);
-      pointer-events: none;
-    }
-
-    .cover-tag {
-      align-self: flex-start;
-      background: rgba(0, 0, 0, 0.32);
-      backdrop-filter: blur(10px);
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      z-index: 1;
-    }
-
-    .cover-title {
-      z-index: 1;
-      font-size: 1.25rem;
-      font-weight: 900;
-      line-height: 1.3;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    }
-
-    .cover-emoji {
-      position: absolute;
+      top: 16px;
       left: 16px;
-      bottom: 14px;
-      font-size: 3rem;
-      opacity: 0.28;
+      z-index: 5;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+      backdrop-filter: blur(14px);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      transition: transform 0.3s var(--spring);
     }
 
-    .book-info {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      flex: 1;
-    }
+    .fav-btn:active { transform: scale(0.8); }
 
-    .book-title {
-      font-size: 1.12rem;
-      font-weight: 800;
-    }
+    .p-title { font-size: 1.12rem; font-weight: 900; }
+    .p-author { font-size: 0.85rem; color: var(--muted); }
 
-    .book-author {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-
-    .book-meta {
+    .p-meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 6px;
+      margin: 4px 0 8px;
     }
 
-    .rating {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #fbbf24;
-    }
-
-    .price {
-      font-size: 1.18rem;
+    .p-price {
+      font-size: 1.24rem;
       font-weight: 900;
       color: var(--accent);
     }
 
-    .card-actions {
-      display: flex;
+    .p-rate {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #fbbf24;
+      background: rgba(251, 191, 36, 0.14);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .p-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-top: 6px;
     }
 
-    .card-actions .btn-glass {
-      flex: 1;
-      padding: 10px 12px;
-      font-size: 0.88rem;
+    .p-actions .btn {
+      padding: 10px 10px;
+      font-size: 0.82rem;
     }
 
-    /* Glass Modals & Apple Pay Sheet */
+    /* Floating iOS 27 Bottom Glass Dock */
+    .dock-wrap {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1150;
+      width: min(94%, 440px);
+    }
+
+    .dock {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      padding: 8px 10px;
+      border-radius: 30px;
+      background: var(--island);
+      backdrop-filter: blur(40px) saturate(220%);
+      -webkit-backdrop-filter: blur(40px) saturate(220%);
+      border: 1px solid var(--border);
+      border-top-color: var(--border-top);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+    }
+
+    .dock-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 7px 4px;
+      border-radius: 20px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      position: relative;
+      transition: all 0.3s var(--spring);
+    }
+
+    .dock-item span.ico { font-size: 1.2rem; }
+    .dock-item.active, .dock-item:hover {
+      background: var(--surface-strong);
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    /* Overlays & iOS Sheets */
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(5, 8, 20, 0.62);
-      backdrop-filter: blur(10px);
+      background: rgba(3, 6, 15, 0.68);
+      backdrop-filter: blur(12px);
       z-index: 2000;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 18px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s ease;
+      transition: opacity 0.3s ease;
     }
 
-    .overlay.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .overlay.open { opacity: 1; pointer-events: auto; }
 
-    .modal-box {
-      width: min(100%, 560px);
-      max-height: 88vh;
-      overflow-y: auto;
-      border-radius: 32px;
-      padding: 26px;
-      transform: translateY(40px) scale(0.95);
-      transition: transform 0.45s var(--spring);
-    }
-
-    .overlay.open .modal-box {
-      transform: translateY(0) scale(1);
-    }
-
-    .sheet-overlay {
-      align-items: flex-end;
-      padding: 0;
-    }
-
-    .sheet-box {
+    .modal {
       width: min(100%, 540px);
       max-height: 88vh;
       overflow-y: auto;
-      border-radius: 34px 34px 0 0;
-      padding: 16px 26px 32px;
+      border-radius: 34px;
+      padding: 24px;
+      transform: translateY(30px) scale(0.95);
+      transition: transform 0.45s var(--spring);
+    }
+
+    .overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .sheet-overlay { align-items: flex-end; padding: 0; }
+
+    .sheet {
+      width: min(100%, 540px);
+      max-height: 92vh;
+      overflow-y: auto;
+      border-radius: 36px 36px 0 0;
+      padding: 14px 24px 32px;
       transform: translateY(100%);
       transition: transform 0.5s var(--spring);
     }
 
-    .sheet-overlay.open .sheet-box {
-      transform: translateY(0);
-    }
+    .sheet-overlay.open .sheet { transform: translateY(0); }
 
-    .sheet-handle {
-      width: 48px;
+    .handle {
+      width: 46px;
       height: 5px;
       border-radius: 999px;
-      background: var(--glass-border);
-      margin: 0 auto 18px;
+      background: var(--border-top);
+      margin: 0 auto 16px;
     }
 
-    .modal-header {
+    .modal-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .sample-box {
-      margin-top: 16px;
-      padding: 16px;
+      margin-top: 14px;
+      padding: 15px;
       border-radius: 20px;
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--glass-border);
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
       line-height: 1.9;
-      font-size: 0.95rem;
+      font-size: 0.93rem;
       display: none;
     }
 
-    body.light-mode .sample-box {
-      background: rgba(255, 255, 255, 0.55);
-    }
-
+    body.light .sample-box { background: rgba(255, 255, 255, 0.7); }
     .sample-box.show { display: block; }
 
-    /* Cart Items */
-    .cart-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
+    .cart-items { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
 
-    .cart-item {
+    .cart-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       padding: 12px 14px;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--glass-border);
+      border: 1px solid var(--border);
     }
 
-    .qty-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
+    .qty-box { display: flex; align-items: center; gap: 8px; }
     .qty-btn {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      color: var(--text-main);
-      font-weight: 800;
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+      color: var(--text);
+      font-weight: 900;
       cursor: pointer;
     }
 
-    .pay-summary {
-      padding: 16px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--glass-border);
-      margin-bottom: 18px;
+    .form-fields {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
-    .pay-row {
+    .field {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text);
+      font-size: 0.94rem;
+      outline: none;
+    }
+
+    .field::placeholder { color: var(--muted); }
+    .field:focus { border-color: var(--accent); }
+
+    .summary {
+      padding: 14px 16px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
       display: flex;
-      justify-content: space-between;
-      font-size: 0.95rem;
+      flex-direction: column;
+      gap: 7px;
     }
 
-    .pay-row.total {
-      font-size: 1.2rem;
+    .sum-row { display: flex; justify-content: space-between; font-size: 0.92rem; }
+    .sum-row.total {
+      font-size: 1.16rem;
       font-weight: 900;
       padding-top: 8px;
-      border-top: 1px solid var(--glass-border);
+      border-top: 1px solid var(--border);
       color: var(--accent);
     }
 
-    .pay-success {
-      text-align: center;
-      padding: 24px 10px;
+    .wa-sent-box {
       display: none;
+      text-align: center;
+      padding: 18px 10px;
     }
 
-    .pay-success.show { display: block; }
-
-    .check-circle {
-      width: 74px;
-      height: 74px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #10b981, #34d399);
-      color: #fff;
-      font-size: 2.2rem;
-      display: grid;
-      place-items: center;
-      margin: 0 auto 14px;
-      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.45);
-      animation: popIn 0.5s var(--spring);
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0); }
-      100% { transform: scale(1); }
-    }
+    .wa-sent-box.show { display: block; }
 
     footer {
-      margin-top: 70px;
+      margin-top: 55px;
       text-align: center;
-      color: var(--text-muted);
-      font-size: 0.92rem;
+      color: var(--muted);
+      font-size: 0.88rem;
     }
 
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 50px 20px;
-      border-radius: 28px;
-      color: var(--text-muted);
-    }
-
-    @media (max-width: 600px) {
-      .brand { font-size: 0.92rem; }
-      .hero-card { padding: 36px 18px; }
+    @media (max-width: 820px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 30px 20px;
+      }
+      .hero p { margin-inline: auto; }
+      .hero-actions, .hero-stats { justify-content: center; }
+      .hero-visual { min-height: 230px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Animated Mesh Background -->
-  <div class="mesh-bg">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+  <div class="aurora">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
   </div>
 
-  <!-- Dynamic Island Navigation -->
-  <div class="island-wrapper">
-    <nav class="dynamic-island" id="dynamicIsland">
-      <div class="island-bar">
-        <a href="#" class="brand">مكتبه السطر الاخير ❤📚</a>
-        <div class="island-actions">
-          <button class="icon-btn" id="themeToggle" title="تغيير المظهر">🌙</button>
-          <button class="icon-btn" id="openCartBtn" title="سلة المشتريات">
+  <!-- iOS 27 Dynamic Island -->
+  <div class="island-wrap">
+    <header class="island" id="island">
+      <div class="island-top">
+        <a href="#" class="brand">
+          <span class="status-dot"></span>
+          <span>مكتبه السطر الاخير ❤📚</span>
+        </a>
+        <div class="island-btns">
+          <button class="circle-btn" id="themeBtn" title="تغيير المظهر">🌙</button>
+          <button class="circle-btn" onclick="openCart()" title="السلة">
             🛒
-            <span class="cart-badge" id="cartCount">0</span>
+            <span class="badge" id="cartBadge">0</span>
           </button>
         </div>
       </div>
-      <div class="island-toast" id="islandToast">
-        <span id="toastText" style="font-size: 0.9rem; font-weight: 700;">تمت الإضافة إلى السلة</span>
-        <button class="btn-glass btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="openCart()">عرض السلة</button>
+      <div class="island-notify">
+        <span id="islandMsg" style="font-size: 0.86rem; font-weight: 800;">تمت الإضافة للسلة</span>
+        <button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.78rem;" onclick="openCart()">إتمام الطلب</button>
       </div>
-    </nav>
+    </header>
   </div>
 
-  <!-- Main Content -->
   <main class="container">
-    <section class="hero">
-      <div class="hero-card glass">
-        <div class="hero-badge">✨ تجربة قراءة وتسوق بتصميم iOS 26 Liquid Glass</div>
-        <h1>مكتبه السطر الاخير ❤📚</h1>
-        <p>
-          أقوى تشكيلة كتب وروايات ومراجع علمية واقتصادية في مكان واحد. تصفّح، اقرأ أول صفحتين مجاناً، واطلب كتابك بضغطة زر وتجربة زجاجية تفاعلية.
-        </p>
-        <div class="hero-btns">
-          <a href="#catalog" class="btn-glass btn-primary">تصفّح الكتب الآن ↓</a>
-          <button class="btn-glass" onclick="openCart()">إتمام الطلب 💳</button>
+    <!-- Hero Section -->
+    <section class="hero" id="top">
+      <div class="hero-card liquid">
+        <div>
+          <div class="ios-pill">✨ iOS 27 Liquid Glass Experience</div>
+          <h1>مكتبه السطر الاخير ❤📚</h1>
+          <p>
+            اختار كتابك بشكل مجسّم 3D، اقرأ أول صفحتين مجاناً، واطلب أوردرك فوراً على الواتساب وهيوصلنا إشعار بطلبك في نفس الثانية!
+          </p>
+          <div class="hero-actions">
+            <a href="#catalog" class="btn btn-primary">تصفّح الكتب 3D ↓</a>
+            <button class="btn btn-wa" onclick="openDirectWhatsApp()">💬 تواصل واتساب مباشر</button>
+          </div>
+          <div class="hero-stats">
+            <span class="stat-chip">🚚 شحن سريع لكل المحافظات</span>
+            <span class="stat-chip">💵 الدفع عند الاستلام</span>
+            <span class="stat-chip">⚡ تأكيد فوري عبر واتساب</span>
+          </div>
+        </div>
+
+        <!-- Featured 3D Book in Hero -->
+        <div class="hero-visual">
+          <div class="book-stage" onclick="openBookModal(1)">
+            <div class="book-3d">
+              <div class="book-front" style="background: linear-gradient(145deg, #0ea5e9, #4f46e5);">
+                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=500&q=80" alt="أرض زيكولا" onerror="this.style.display='none'">
+                <div class="cover-top">
+                  <span class="cover-cat">الأكثر مبيعاً</span>
+                  <span>★ 4.9</span>
+                </div>
+                <div class="cover-emblem">📖</div>
+                <div>
+                  <div class="cover-name">أرض زيكولا</div>
+                  <div class="cover-writer">عمرو عبد الحميد</div>
+                </div>
+              </div>
+              <div class="book-spine" style="background: linear-gradient(145deg, #0284c7, #3730a3);"></div>
+              <div class="book-pages"></div>
+              <div class="book-back" style="background: #1e1b4b;"></div>
+            </div>
+            <div class="book-shadow"></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Search & Filter Controls -->
-    <section id="catalog" class="controls">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
+    <!-- Search & Categories -->
+    <section class="controls" id="catalog">
+      <div class="search-wrap">
+        <span class="search-ico">🔍</span>
         <input type="text" id="searchInput" placeholder="ابحث باسم الكتاب أو المؤلف..." />
       </div>
-      <div class="categories" id="categoriesBar"></div>
+      <div class="cats" id="catsBar"></div>
     </section>
 
-    <!-- Books Grid -->
-    <section class="books-grid" id="booksGrid"></section>
+    <!-- 3D Books Grid -->
+    <section class="grid" id="booksGrid"></section>
 
     <footer>
       <p>جميع الحقوق محفوظة © 2026 — <strong>مكتبه السطر الاخير ❤📚</strong></p>
     </footer>
   </main>
 
+  <!-- Floating iOS 27 Glass Dock -->
+  <div class="dock-wrap">
+    <nav class="dock">
+      <a href="#top" class="dock-item active" onclick="setDockView('all', this)">
+        <span class="ico">🏠</span>
+        <span>الرئيسية</span>
+      </a>
+      <a href="#catalog" class="dock-item" onclick="setDockView('all', this)">
+        <span class="ico">📚</span>
+        <span>الكتب</span>
+      </a>
+      <button class="dock-item" onclick="setDockView('fav', this)">
+        <span class="ico">❤️</span>
+        <span>المفضلة</span>
+      </button>
+      <button class="dock-item" onclick="openCart()">
+        <span class="ico">🛒</span>
+        <span>السلة</span>
+      </button>
+      <button class="dock-item" onclick="openDirectWhatsApp()">
+        <span class="ico">💬</span>
+        <span>واتساب</span>
+      </button>
+    </nav>
+  </div>
+
   <!-- Book Preview Modal -->
   <div class="overlay" id="bookModal">
-    <div class="modal-box glass">
-      <div class="modal-header">
-        <h3 id="modalTitle">عنوان الكتاب</h3>
-        <button class="icon-btn" onclick="closeBookModal()">✕</button>
+    <div class="modal liquid">
+      <div class="modal-head">
+        <h3 id="mTitle">عنوان الكتاب</h3>
+        <button class="circle-btn" onclick="closeBookModal()">✕</button>
       </div>
-      <p id="modalAuthor" style="color: var(--text-muted); margin-bottom: 10px;"></p>
-      <p id="modalDesc" style="line-height: 1.8; margin-bottom: 18px;"></p>
+      <p id="mAuthor" style="color: var(--muted); margin-bottom: 10px; font-weight: 700;"></p>
+      <p id="mDesc" style="line-height: 1.85; margin-bottom: 18px;"></p>
 
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button class="btn-glass" id="toggleSampleBtn">📖 اقرأ أول صفحتين</button>
-        <button class="btn-glass btn-primary" id="modalAddBtn">أضف للسلة</button>
+        <button class="btn" id="mSampleBtn">📖 اقرأ أول صفحتين</button>
+        <button class="btn btn-primary" id="mAddBtn">+ أضف للسلة</button>
+        <button class="btn btn-wa" id="mOrderNowBtn">⚡ اطلب الآن واتساب</button>
       </div>
 
-      <div class="sample-box" id="sampleBox"></div>
+      <div class="sample-box" id="mSampleBox"></div>
     </div>
   </div>
 
-  <!-- Apple Pay Style Cart & Checkout Sheet -->
+  <!-- Cart & WhatsApp Order Sheet -->
   <div class="overlay sheet-overlay" id="cartSheet">
-    <div class="sheet-box glass">
-      <div class="sheet-handle"></div>
-      <div class="modal-header">
+    <div class="sheet liquid">
+      <div class="handle"></div>
+      <div class="modal-head">
         <h3>سلة مكتبه السطر الاخير ❤📚</h3>
-        <button class="icon-btn" onclick="closeCart()">✕</button>
+        <button class="circle-btn" onclick="closeCart()">✕</button>
       </div>
 
-      <div id="cartContent">
-        <div class="cart-list" id="cartList"></div>
+      <div id="cartMain">
+        <div class="cart-items" id="cartList"></div>
 
-        <div class="pay-summary" id="paySummary">
-          <div class="pay-row"><span>المجموع الفرعي</span><span id="subtotalText">0 ج.م</span></div>
-          <div class="pay-row"><span>الشحن السريع</span><span>40 ج.م</span></div>
-          <div class="pay-row total"><span>الإجمالي</span><span id="totalText">0 ج.م</span></div>
+        <div class="form-fields" id="formFields">
+          <input type="text" id="custName" class="field" placeholder="الاسم بالكامل (مطلوب) *" />
+          <input type="tel" id="custPhone" class="field" placeholder="رقم موبايلك للتواصل (مطلوب) *" />
+          <input type="text" id="custAddress" class="field" placeholder="العنوان بالتفصيل (المحافظة / المنطقة) *" />
         </div>
 
-        <button class="btn-glass btn-primary" id="checkoutBtn" style="width: 100%; padding: 14px; font-size: 1.05rem;">
-           الدفع السريع وتأكيد الطلب
+        <div class="summary" id="cartSummary">
+          <div class="sum-row"><span>المجموع الفرعي</span><span id="subTxt">0 ج.م</span></div>
+          <div class="sum-row"><span>الشحن السريع</span><span>40 ج.م</span></div>
+          <div class="sum-row total"><span>الإجمالي</span><span id="totTxt">0 ج.م</span></div>
+        </div>
+
+        <button class="btn btn-wa" id="sendOrderBtn" style="width: 100%; padding: 15px; font-size: 1.02rem;">
+          💬 تأكيد وإرسال الأوردر على واتساب
         </button>
       </div>
 
-      <div class="pay-success" id="paySuccess">
-        <div class="check-circle">✓</div>
-        <h3 style="margin-bottom: 8px;">تم تأكيد طلبك بنجاح!</h3>
-        <p style="color: var(--text-muted); margin-bottom: 20px;">
-          شكراً لتسوقك من <strong>مكتبه السطر الاخير ❤📚</strong>. طلبك بيتجهز وهيوصل لحد باب بيتك خلال 48 ساعة.
+      <!-- Confirmation & Direct Link Fallback -->
+      <div class="wa-sent-box" id="waSentBox">
+        <div style="font-size: 3rem; margin-bottom: 8px;">✅</div>
+        <h3 style="margin-bottom: 8px;">تم تجهيز الأوردر بنجاح!</h3>
+        <p style="color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 18px;">
+          تم تحويلك على الواتساب برسالة الأوردر — اضغط <strong>إرسال (Send)</strong> جوه الواتساب عشان يوصلنا إشعار طلبك فوراً.
         </p>
-        <button class="btn-glass btn-primary" onclick="closeCart()">العودة للمكتبة</button>
+        <a id="waFallbackLink" href="#" target="_blank" class="btn btn-wa" style="width: 100%; padding: 14px; margin-bottom: 10px;">
+          💬 افتح واتساب لإرسال الأوردر الآن
+        </a>
+        <button class="btn" style="width: 100%;" onclick="resetAfterOrder()">العودة للمكتبة</button>
       </div>
     </div>
   </div>
 
   <script>
+    // رقم الواتساب الخاص بك (مصر: 20 + الرقم بدون الصفر الأول)
+    const WHATSAPP_NUMBER = "201100329703";
+
     const books = [
       {
         id: 1,
@@ -851,10 +1067,12 @@
         category: "روايات",
         price: 165,
         rating: 4.9,
-        emoji: "🏛️",
-        gradient: "linear-gradient(135deg, #0ea5e9, #6366f1)",
+        emblem: "🏛️",
+        gradient: "linear-gradient(145deg, #0ea5e9, #4f46e5)",
+        spine: "#1e3a8a",
+        image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=500&q=80",
         desc: "رواية خيالية مشوقة عن شاب يجد نفسه في أرض لا تتعامل بالمال بل بوحدات الذكاء، حيث يصبح الفقير مهدداً بالذبح.",
-        sample: "«هل جربت أن تتعامل بعملة مختلفة عن العملات الورقية؟ ليست معدنية وليست ذهبية... الثروة هنا هي نوع آخر من الثروات؛ لن تدفع مالاً لتأخذ، بل ستدفع من ذكائك...»"
+        sample: "«هل جربت أن تتعامل بعملة مختلفة عن العملات الورقية؟ الثروة هنا هي نوع آخر من الثروات؛ لن تدفع مالاً لتأخذ، بل ستدفع من ذكائك...»"
       },
       {
         id: 2,
@@ -863,10 +1081,12 @@
         category: "اقتصاد",
         price: 210,
         rating: 4.8,
-        emoji: "📈",
-        gradient: "linear-gradient(135deg, #10b981, #0d9488)",
+        emblem: "📊",
+        gradient: "linear-gradient(145deg, #10b981, #0f766e)",
+        spine: "#064e3b",
+        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=500&q=80",
         desc: "دليل مبسط وعملي لفهم العرض والطلب، الأسواق، التضخم، وكيفية اتخاذ قرارات اقتصادية ذكية في عالم اليوم.",
-        sample: "«الاقتصاد ليس مجرد أرقام ومعادلات معقدة، بل هو علم دراسة الاختيارات البشرية في ظل ندرة الموارد. كل قرار تتخذه يومياً له تكلفة فرصة بديلة...»"
+        sample: "«الاقتصاد ليس مجرد أرقام ومعادلات معقدة، بل هو علم دراسة الاختيارات البشرية في ظل ندرة الموارد...»"
       },
       {
         id: 3,
@@ -875,22 +1095,26 @@
         category: "تطوير ذات",
         price: 190,
         rating: 4.9,
-        emoji: "⚡",
-        gradient: "linear-gradient(135deg, #f59e0b, #ef4444)",
+        emblem: "⚛️",
+        gradient: "linear-gradient(145deg, #f59e0b, #dc2626)",
+        spine: "#7c2d12",
+        image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=500&q=80",
         desc: "كيف تصنع تغييرات صغيرة جداً بنسبة 1% يومياً لتبني نظاماً يحقق لك نتائج مذهلة على المدى الطويل.",
-        sample: "«أنت لا ترتقي إلى مستوى أهدافك، بل تهبط إلى مستوى أنظمتك. التغييرات التي تبدو تافهة في البداية تتراكم بمرور السنوات لتصنع فارقاً هائلاً...»"
+        sample: "«أنت لا ترتقي إلى مستوى أهدافك، بل تهبط إلى مستوى أنظمتك. التغييرات الصغيرة تتراكم لتصنع فارقاً هائلاً...»"
       },
       {
         id: 4,
-        title: "فن كتابة الكود النظيف",
+        title: "فن الكود النظيف",
         author: "روبرت سي. مارتن",
         category: "برمجة",
         price: 280,
         rating: 4.9,
-        emoji: "💻",
-        gradient: "linear-gradient(135deg, #8b5cf6, #ec4899)",
+        emblem: "💻",
+        gradient: "linear-gradient(145deg, #8b5cf6, #ec4899)",
+        spine: "#581c87",
+        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80",
         desc: "المرجع الأشهر لكل مبرمج يريد تحويل أكواده من مجرد سطور تعمل إلى هندسة برمجية احترافية سهلة الصيانة.",
-        sample: "«أي أحمق يمكنه كتابة كود يفهمه الكمبيوتر، لكن المبرمج الجيد فقط هو من يكتب كوداً يفهمه البشر بسهولة بعد ستة أشهر...»"
+        sample: "«أي شخص يمكنه كتابة كود يفهمه الكمبيوتر، لكن المبرمج المحترف هو من يكتب كوداً يفهمه البشر بسهولة...»"
       },
       {
         id: 5,
@@ -899,10 +1123,12 @@
         category: "تاريخ",
         price: 175,
         rating: 4.7,
-        emoji: "🕯️",
-        gradient: "linear-gradient(135deg, #dc2626, #7f1d1d)",
+        emblem: "🕯️",
+        gradient: "linear-gradient(145deg, #dc2626, #450a0a)",
+        spine: "#450a0a",
+        image: "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=500&q=80",
         desc: "رحلة تاريخية غامضة تمزج بين الوقائع التاريخية والأساطير منذ فجر التاريخ وحتى العصر الحديث بأسلوب مشوق.",
-        sample: "«اجلس الآن واستمع جيداً؛ ما ستقرؤه في الصفحات القادمة ليس مجرد حكايات عابرة، بل خيوط خفية ربطت بين أحداث غيّرت مجرى العالم...»"
+        sample: "«اجلس الآن واستمع جيداً؛ ما ستقرؤه في الصفحات القادمة خيوط خفية ربطت بين أحداث غيّرت مجرى العالم...»"
       },
       {
         id: 6,
@@ -911,10 +1137,12 @@
         category: "اقتصاد",
         price: 195,
         rating: 4.8,
-        emoji: "💰",
-        gradient: "linear-gradient(135deg, #06b6d4, #2563eb)",
+        emblem: "💎",
+        gradient: "linear-gradient(145deg, #06b6d4, #1d4ed8)",
+        spine: "#1e3a8a",
+        image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=500&q=80",
         desc: "19 قصة قصيرة تشرح الطرق الغريبة التي يفكر بها الناس تجاه المال وتعلمك كيف تبني ثروة وتحافظ عليها.",
-        sample: "«النجاح المالي ليس علماً دقيقاً كالفيزياء، إنه مهارة ناعمة حيث يكون سلوكك أهم بكثير من مدى ذكائك أو شهاداتك...»"
+        sample: "«النجاح المالي ليس علماً دقيقاً كالفيزياء، إنه مهارة ناعمة حيث يكون سلوكك أهم بكثير من ذكائك...»"
       },
       {
         id: 7,
@@ -923,265 +1151,325 @@
         category: "روايات",
         price: 160,
         rating: 4.9,
-        emoji: "🌌",
-        gradient: "linear-gradient(135deg, #334155, #0f172a)",
+        emblem: "🌑",
+        gradient: "linear-gradient(145deg, #475569, #0f172a)",
+        spine: "#020617",
+        image: "https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=500&q=80",
         desc: "رواية سوداوية ساحرة عن عالم الظلام الدامس حيث يصبح النور جريمة والحلم بالخروج مغامرة مستحيلة.",
-        sample: "«الظلام ليس غياب الضوء فحسب، إنه كائن حي يتنفس حولنا ويقنعنا يوماً بعد يوم أن الشمس لم تكن سوى خرافة قديمة...»"
+        sample: "«الظلام ليس غياب الضوء فحسب، إنه كائن حي يتنفس حولنا ويقنعنا أن الشمس لم تكن سوى خرافة...»"
       },
       {
         id: 8,
-        title: "أساسيات تطوير الويب",
+        title: "تطوير الويب الحديث",
         author: "م. طارق المنصور",
         category: "برمجة",
         price: 230,
         rating: 4.7,
-        emoji: "🌐",
-        gradient: "linear-gradient(135deg, #ec4899, #f97316)",
+        emblem: "🚀",
+        gradient: "linear-gradient(145deg, #ec4899, #f97316)",
+        spine: "#9a3412",
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80",
         desc: "رحلة عملية من الصفر للاحتراف في بناء واجهات تفاعلية حديثة باستخدام HTML و CSS و JavaScript.",
-        sample: "«الويب الحديث لم يعد مجرد صفحات نصية جامدة؛ باستخدام CSS والأنيميشن الذكي يمكنك صناعة تجربة تضاهي أقوى تطبيقات الهواتف...»"
+        sample: "«الويب الحديث لم يعد مجرد صفحات جامدة؛ بالأنيميشن والتصميم الزجاجي تقدر تصنع تجربة تضاهي تطبيقات الآيفون...»"
       }
     ];
 
     const categories = ["الكل", "روايات", "اقتصاد", "برمجة", "تطوير ذات", "تاريخ"];
-    let activeCategory = "الكل";
+    let activeCat = "الكل";
+    let onlyFavs = false;
     let searchQuery = "";
-    let cart = JSON.parse(localStorage.getItem("lastLineCart")) || [];
+    let cart = JSON.parse(localStorage.getItem("ll_cart_v2")) || [];
+    let favs = JSON.parse(localStorage.getItem("ll_favs_v2")) || [];
     let islandTimer = null;
 
-    const booksGrid = document.getElementById("booksGrid");
-    const categoriesBar = document.getElementById("categoriesBar");
-    const searchInput = document.getElementById("searchInput");
-    const cartCount = document.getElementById("cartCount");
-    const dynamicIsland = document.getElementById("dynamicIsland");
-    const toastText = document.getElementById("toastText");
+    const grid = document.getElementById("booksGrid");
+    const catsBar = document.getElementById("catsBar");
+    const island = document.getElementById("island");
+    const islandMsg = document.getElementById("islandMsg");
+    const cartBadge = document.getElementById("cartBadge");
+    const themeBtn = document.getElementById("themeBtn");
 
-    // Theme Toggle
-    const themeToggle = document.getElementById("themeToggle");
-    if (localStorage.getItem("lastLineTheme") === "light") {
-      document.body.classList.add("light-mode");
-      themeToggle.textContent = "☀️";
+    if (localStorage.getItem("ll_theme_v2") === "light") {
+      document.body.classList.add("light");
+      themeBtn.textContent = "☀️";
     }
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("light-mode");
-      const isLight = document.body.classList.contains("light-mode");
-      themeToggle.textContent = isLight ? "☀️" : "🌙";
-      localStorage.setItem("lastLineTheme", isLight ? "light" : "dark");
+
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      const isLight = document.body.classList.contains("light");
+      themeBtn.textContent = isLight ? "☀️" : "🌙";
+      localStorage.setItem("ll_theme_v2", isLight ? "light" : "dark");
     });
 
-    // Render Categories
-    function renderCategories() {
-      categoriesBar.innerHTML = categories.map(cat => `
-        <button class="cat-pill ${cat === activeCategory ? "active" : ""}" onclick="setCategory('${cat}')">${cat}</button>
+    function notifyIsland(text) {
+      islandMsg.textContent = text;
+      island.classList.add("live");
+      clearTimeout(islandTimer);
+      islandTimer = setTimeout(() => island.classList.remove("live"), 3200);
+    }
+
+    function renderCats() {
+      catsBar.innerHTML = categories.map(c => `
+        <button class="cat-btn ${c === activeCat && !onlyFavs ? "active" : ""}" onclick="selectCat('${c}')">${c}</button>
       `).join("");
     }
 
-    function setCategory(cat) {
-      activeCategory = cat;
-      renderCategories();
+    function selectCat(c) {
+      onlyFavs = false;
+      activeCat = c;
+      renderCats();
       renderBooks();
     }
 
-    // Render Books with 3D Tilt & Specular Highlight
+    function setDockView(mode, el) {
+      document.querySelectorAll(".dock-item").forEach(i => i.classList.remove("active"));
+      if (el) el.classList.add("active");
+      onlyFavs = mode === "fav";
+      renderCats();
+      renderBooks();
+      if (mode === "fav") {
+        document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
+        notifyIsland("عرض الكتب المفضلة ❤️");
+      }
+    }
+
+    function toggleFav(id, e) {
+      e.stopPropagation();
+      if (favs.includes(id)) favs = favs.filter(f => f !== id);
+      else favs.push(id);
+      localStorage.setItem("ll_favs_v2", JSON.stringify(favs));
+      renderBooks();
+      notifyIsland(favs.includes(id) ? "تمت الإضافة للمفضلة ❤️" : "تمت الإزالة من المفضلة");
+    }
+
     function renderBooks() {
-      const filtered = books.filter(b => {
-        const matchCat = activeCategory === "الكل" || b.category === activeCategory;
+      const list = books.filter(b => {
+        if (onlyFavs && !favs.includes(b.id)) return false;
+        const catOk = onlyFavs || activeCat === "الكل" || b.category === activeCat;
         const q = searchQuery.trim().toLowerCase();
-        const matchSearch = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q);
-        return matchCat && matchSearch;
+        const searchOk = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q);
+        return catOk && searchOk;
       });
 
-      if (!filtered.length) {
-        booksGrid.innerHTML = `<div class="empty-state glass"><h3>مفيش كتب مطابقة لبحثك 🔍</h3><p>جرب تكتب كلمة تانية أو تختار قسم "الكل".</p></div>`;
+      if (!list.length) {
+        grid.innerHTML = `
+          <div class="liquid" style="grid-column:1/-1; text-align:center; padding:45px 20px; border-radius:30px; color:var(--muted);">
+            <h3>${onlyFavs ? "لسه مضفتش كتب للمفضلة ❤️" : "مفيش كتب مطابقة للبحث 🔍"}</h3>
+          </div>`;
         return;
       }
 
-      booksGrid.innerHTML = filtered.map(book => `
-        <article class="book-card glass" onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)" onclick="openBookModal(${book.id})">
-          <div class="book-cover" style="background: ${book.gradient}">
-            <span class="cover-tag">${book.category}</span>
-            <div class="cover-title">${book.title}</div>
-            <span class="cover-emoji">${book.emoji}</span>
-          </div>
-          <div class="book-info">
-            <h3 class="book-title">${book.title}</h3>
-            <p class="book-author">${book.author}</p>
-            <div class="book-meta">
-              <span class="rating">★ ${book.rating}</span>
-              <span class="price">${book.price} ج.م</span>
+      grid.innerHTML = list.map(book => `
+        <article class="product-card liquid">
+          <button class="fav-btn" onclick="toggleFav(${book.id}, event)">${favs.includes(book.id) ? "❤️" : "🤍"}</button>
+
+          <div class="book-stage" onclick="openBookModal(${book.id})">
+            <div class="book-3d">
+              <div class="book-front" style="background: ${book.gradient};">
+                <img src="${book.image}" alt="${book.title}" loading="lazy" onerror="this.style.display='none'">
+                <div class="cover-top">
+                  <span class="cover-cat">${book.category}</span>
+                </div>
+                <div class="cover-emblem">${book.emblem}</div>
+                <div>
+                  <div class="cover-name">${book.title}</div>
+                  <div class="cover-writer">${book.author}</div>
+                </div>
+              </div>
+              <div class="book-spine" style="background: ${book.spine};"></div>
+              <div class="book-pages"></div>
+              <div class="book-back" style="background: ${book.spine};"></div>
             </div>
+            <div class="book-shadow"></div>
           </div>
-          <div class="card-actions" onclick="event.stopPropagation()">
-            <button class="btn-glass" onclick="openBookModal(${book.id})">معاينة</button>
-            <button class="btn-glass btn-primary" onclick="addToCart(${book.id})">+ للسلة</button>
+
+          <h3 class="p-title">${book.title}</h3>
+          <p class="p-author">${book.author}</p>
+
+          <div class="p-meta">
+            <span class="p-price">${book.price} ج.م</span>
+            <span class="p-rate">★ ${book.rating}</span>
+          </div>
+
+          <div class="p-actions">
+            <button class="btn btn-primary" onclick="addToCart(${book.id})">+ للسلة</button>
+            <button class="btn btn-wa" onclick="quickOrder(${book.id})">⚡ اطلب واتساب</button>
           </div>
         </article>
       `).join("");
     }
 
-    // 3D Tilt + Liquid Specular Light
-    function handleTilt(e, card) {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const rotateY = ((x / rect.width) - 0.5) * 14;
-      const rotateX = ((y / rect.height) - 0.5) * -14;
-
-      card.style.setProperty("--mx", `${x}px`);
-      card.style.setProperty("--my", `${y}px`);
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
-    }
-
-    function resetTilt(card) {
-      card.style.transform = `rotateX(0deg) rotateY(0deg) translateY(0)`;
-    }
-
-    // Book Modal
+    /* Book Modal */
     const bookModal = document.getElementById("bookModal");
-    const sampleBox = document.getElementById("sampleBox");
+    const mSampleBox = document.getElementById("mSampleBox");
 
     function openBookModal(id) {
-      const book = books.find(b => b.id === id);
-      if (!book) return;
-      document.getElementById("modalTitle").textContent = `${book.emoji} ${book.title}`;
-      document.getElementById("modalAuthor").textContent = `تأليف: ${book.author} • ${book.category} • ${book.price} ج.م`;
-      document.getElementById("modalDesc").textContent = book.desc;
-      sampleBox.textContent = book.sample;
-      sampleBox.classList.remove("show");
+      const b = books.find(x => x.id === id);
+      if (!b) return;
+      document.getElementById("mTitle").textContent = b.title;
+      document.getElementById("mAuthor").textContent = `تأليف: ${b.author} • ${b.category} • ${b.price} ج.م`;
+      document.getElementById("mDesc").textContent = b.desc;
+      mSampleBox.textContent = b.sample;
+      mSampleBox.classList.remove("show");
 
-      document.getElementById("toggleSampleBtn").onclick = () => {
-        sampleBox.classList.toggle("show");
-      };
-      document.getElementById("modalAddBtn").onclick = () => {
-        addToCart(book.id);
-        closeBookModal();
-      };
+      document.getElementById("mSampleBtn").onclick = () => mSampleBox.classList.toggle("show");
+      document.getElementById("mAddBtn").onclick = () => { addToCart(b.id); closeBookModal(); };
+      document.getElementById("mOrderNowBtn").onclick = () => { closeBookModal(); quickOrder(b.id); };
+
       bookModal.classList.add("open");
     }
 
-    function closeBookModal() {
-      bookModal.classList.remove("open");
-    }
+    function closeBookModal() { bookModal.classList.remove("open"); }
+    bookModal.addEventListener("click", e => { if (e.target === bookModal) closeBookModal(); });
 
-    bookModal.addEventListener("click", e => {
-      if (e.target === bookModal) closeBookModal();
-    });
-
-    // Cart Logic + Dynamic Island Notification
+    /* Cart Logic */
     function saveCart() {
-      localStorage.setItem("lastLineCart", JSON.stringify(cart));
-      updateCartBadge();
-    }
-
-    function updateCartBadge() {
-      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-      cartCount.textContent = totalItems;
-    }
-
-    function showIslandToast(msg) {
-      toastText.textContent = msg;
-      dynamicIsland.classList.add("expanded");
-      clearTimeout(islandTimer);
-      islandTimer = setTimeout(() => {
-        dynamicIsland.classList.remove("expanded");
-      }, 3200);
+      localStorage.setItem("ll_cart_v2", JSON.stringify(cart));
+      cartBadge.textContent = cart.reduce((s, i) => s + i.qty, 0);
     }
 
     function addToCart(id) {
-      const book = books.find(b => b.id === id);
-      if (!book) return;
-      const existing = cart.find(i => i.id === id);
-      if (existing) existing.qty += 1;
-      else cart.push({ ...book, qty: 1 });
+      const b = books.find(x => x.id === id);
+      if (!b) return;
+      const ex = cart.find(i => i.id === id);
+      if (ex) ex.qty++;
+      else cart.push({ ...b, qty: 1 });
       saveCart();
-      showIslandToast(`تمت إضافة "${book.title}" للسلة ✓`);
+      notifyIsland(`تمت إضافة "${b.title}" للسلة ✓`);
     }
 
-    function changeQty(id, delta) {
+    function quickOrder(id) {
+      const b = books.find(x => x.id === id);
+      if (!b) return;
+      if (!cart.find(i => i.id === id)) {
+        cart.push({ ...b, qty: 1 });
+        saveCart();
+      }
+      openCart();
+    }
+
+    function changeQty(id, d) {
       const item = cart.find(i => i.id === id);
       if (!item) return;
-      item.qty += delta;
+      item.qty += d;
       if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
       saveCart();
-      renderCartSheet();
+      renderCart();
     }
 
-    // Cart Sheet (Apple Pay Style)
     const cartSheet = document.getElementById("cartSheet");
-    const cartList = document.getElementById("cartList");
-    const cartContent = document.getElementById("cartContent");
-    const paySuccess = document.getElementById("paySuccess");
-    const checkoutBtn = document.getElementById("checkoutBtn");
+    const cartMain = document.getElementById("cartMain");
+    const waSentBox = document.getElementById("waSentBox");
 
-    function renderCartSheet() {
-      paySuccess.classList.remove("show");
-      cartContent.style.display = "block";
+    function renderCart() {
+      cartMain.style.display = "block";
+      waSentBox.classList.remove("show");
 
+      const listEl = document.getElementById("cartList");
       if (!cart.length) {
-        cartList.innerHTML = `<p style="text-align:center; color: var(--text-muted); padding: 20px 0;">السلة فاضية حالياً.. اختار كتابك المفضل 📚</p>`;
-        document.getElementById("paySummary").style.display = "none";
-        checkoutBtn.style.display = "none";
+        listEl.innerHTML = `<p style="text-align:center; color:var(--muted); padding:24px 0;">السلة فاضية.. اختار كتابك المفضل 📚</p>`;
+        document.getElementById("formFields").style.display = "none";
+        document.getElementById("cartSummary").style.display = "none";
+        document.getElementById("sendOrderBtn").style.display = "none";
         return;
       }
 
-      document.getElementById("paySummary").style.display = "flex";
-      checkoutBtn.style.display = "inline-flex";
+      document.getElementById("formFields").style.display = "flex";
+      document.getElementById("cartSummary").style.display = "flex";
+      document.getElementById("sendOrderBtn").style.display = "inline-flex";
 
-      cartList.innerHTML = cart.map(item => `
-        <div class="cart-item">
+      listEl.innerHTML = cart.map(i => `
+        <div class="cart-row">
           <div>
-            <div style="font-weight: 800;">${item.title}</div>
-            <div style="font-size: 0.85rem; color: var(--accent);">${item.price * item.qty} ج.م</div>
+            <div style="font-weight:800;">${i.title}</div>
+            <div style="font-size:0.84rem; color:var(--accent); font-weight:700;">${i.price * i.qty} ج.م</div>
           </div>
-          <div class="qty-controls">
-            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
-            <span style="min-width: 22px; text-align:center; font-weight: 700;">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+          <div class="qty-box">
+            <button class="qty-btn" onclick="changeQty(${i.id}, -1)">-</button>
+            <span style="min-width:20px; text-align:center; font-weight:800;">${i.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${i.id}, 1)">+</button>
           </div>
         </div>
       `).join("");
 
-      const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-      document.getElementById("subtotalText").textContent = `${subtotal} ج.م`;
-      document.getElementById("totalText").textContent = `${subtotal + 40} ج.م`;
+      const sub = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      document.getElementById("subTxt").textContent = `${sub} ج.م`;
+      document.getElementById("totTxt").textContent = `${sub + 40} ج.م`;
     }
 
     function openCart() {
-      dynamicIsland.classList.remove("expanded");
-      renderCartSheet();
+      island.classList.remove("live");
+      renderCart();
       cartSheet.classList.add("open");
     }
 
-    function closeCart() {
-      cartSheet.classList.remove("open");
+    function closeCart() { cartSheet.classList.remove("open"); }
+    cartSheet.addEventListener("click", e => { if (e.target === cartSheet) closeCart(); });
+
+    function buildWhatsAppUrl(text) {
+      return `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(text)}`;
     }
 
-    document.getElementById("openCartBtn").addEventListener("click", openCart);
-    cartSheet.addEventListener("click", e => {
-      if (e.target === cartSheet) closeCart();
+    function openDirectWhatsApp() {
+      const url = buildWhatsAppUrl("مرحباً مكتبه السطر الاخير ❤📚، عندي استفسار بخصوص الكتب.");
+      window.open(url, "_blank");
+    }
+
+    document.getElementById("sendOrderBtn").addEventListener("click", () => {
+      if (!cart.length) return;
+
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+
+      if (!name || !phone || !address) {
+        notifyIsland("⚠️ من فضلك اكتب الاسم ورقم الموبايل والعنوان");
+        return;
+      }
+
+      const orderId = "LL-" + Math.floor(1000 + Math.random() * 9000);
+      const sub = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const total = sub + 40;
+      const itemsText = cart.map(i => `• ${i.title} (الكمية: ${i.qty}) — ${i.price * i.qty} ج.م`).join("\n");
+
+      const msg =
+        `🔔 *أوردر جديد من موقع مكتبه السطر الاخير ❤📚*\n` +
+        `رقم الطلب: #${orderId}\n` +
+        `━━━━━━━━━━━━━━\n` +
+        `${itemsText}\n` +
+        `━━━━━━━━━━━━━━\n` +
+        `المجموع: ${sub} ج.م\n` +
+        `الشحن: 40 ج.م\n` +
+        `💰 *الإجمالي: ${total} ج.م*\n\n` +
+        `👤 الاسم: ${name}\n` +
+        `📱 الموبايل: ${phone}\n` +
+        `📍 العنوان: ${address}`;
+
+      const waUrl = buildWhatsAppUrl(msg);
+
+      document.getElementById("waFallbackLink").href = waUrl;
+      cartMain.style.display = "none";
+      waSentBox.classList.add("show");
+
+      // فتح الواتساب مباشرة
+      window.location.href = waUrl;
     });
 
-    checkoutBtn.addEventListener("click", () => {
-      checkoutBtn.textContent = "جاري تأكيد الدفع...";
-      checkoutBtn.disabled = true;
-      setTimeout(() => {
-        cart = [];
-        saveCart();
-        cartContent.style.display = "none";
-        paySuccess.classList.add("show");
-        checkoutBtn.textContent = " الدفع السريع وتأكيد الطلب";
-        checkoutBtn.disabled = false;
-      }, 900);
-    });
+    function resetAfterOrder() {
+      cart = [];
+      saveCart();
+      closeCart();
+      notifyIsland("شكراً لطلبك من مكتبه السطر الاخير ❤📚");
+    }
 
-    searchInput.addEventListener("input", e => {
+    document.getElementById("searchInput").addEventListener("input", e => {
       searchQuery = e.target.value;
       renderBooks();
     });
 
-    // Init
-    renderCategories();
+    renderCats();
     renderBooks();
-    updateCartBadge();
+    saveCart();
   </script>
 </body>
 </html>
